@@ -251,7 +251,7 @@
 		                 
 		                <div class="first3ImageandName">
 			             <p>"Keyboard" <br> 00: 46</p>
-			             <img class="thumbnails" id="output3" src="Gallery/Thumbnails/Keyboard.webp">
+			             <img class="thumbnails" id="output3" src="Gallery/Thumbnails/KEYBOARD.webp">
 			            </div> 
 		           </div>
 	        </div>
@@ -268,7 +268,7 @@
 		 	 <div class="lowerPortfolio">
 		 	    		    <div class="portfolioCont">
 					    
-				             <img class="thumbnailslower" id="output4" src="Gallery/THUMBNAILS/TURNTABLE.webp">
+				             <img class="thumbnailslower" id="output4" src="Gallery/Thumbnails/TURNTABLE.webp">
 				             <p>Turntable <br> 00:31 </p>
 				            </div>
 
@@ -1283,6 +1283,7 @@ order:2;}
 
 let vidDivIsOpen = false;
 let pvidDivIsOpen = false;
+let imgDivIsOpen = false;
 let linksIsShown = false;
 
 
@@ -1351,7 +1352,7 @@ let ManorswitchIsNeeded = false;
 var currentPic = 0;
 //--------------------------------------
 function loadCurves(){
-	 vidToBePlayed.src = "Gallery/Videos/Lossless Videos/CURVES.mp4";
+	 vidToBePlayed.src = "Gallery/Videos/CURVES.mp4";
 	 vidToBePlayed.poster = "Gallery/Thumbnails/CURVES_POSTER.webp";
 	 vidTitle.textContent = "CURVES.";
 	 vidDesc.textContent = "A TWS Product Launch Concept";
@@ -1613,6 +1614,11 @@ function closeViewer() {
 }
 
 
+
+
+
+
+
 window.addEventListener("popstate", function (event) {
     // Prevent the default back button behavior
     history.pushState(null, null, location.href);
@@ -1630,6 +1636,10 @@ if (imgDivIsOpen === true || pvidDivIsOpen === true || vidDivIsOpen === true) {
 
 // Push an initial state to manipulate history
 history.pushState(null, null, location.href);
+
+
+
+
 
 
 
@@ -1674,7 +1684,7 @@ function stopManorLoop() {
 
 
 function linkToClip() {
-  navigator.clipboard.writeText("https://lennyjones.github.io/Portfolio-Site");
+  navigator.clipboard.writeText("https://lennyjones.github.io/Portfolio-Site/");
   alert("Link copied to clipboard!");
 }
 
