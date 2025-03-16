@@ -1613,6 +1613,24 @@ function closeViewer() {
 }
 
 
+window.addEventListener("popstate", function (event) {
+    // Prevent the default back button behavior
+    history.pushState(null, null, location.href);
+
+
+if (imgDivIsOpen === true || pvidDivIsOpen === true || vidDivIsOpen === true) {
+    // Code to execute if at least one condition is true
+    imgViewerdiv.style.visibility = "hidden";
+    pvidplayerdiv.style.visibility = "hidden";
+    vidplayerdiv.style.visibility = "hidden";
+
+}
+ 
+});
+
+// Push an initial state to manipulate history
+history.pushState(null, null, location.href);
+
 
 
 function changeHouse1() {
