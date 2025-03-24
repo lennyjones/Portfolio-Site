@@ -1040,10 +1040,12 @@ bottom:0;
 
 #vidAndInfoWrapper{
 	flex-direction: column;
+	padding: 0% 3% 0% 3%;
 }
 
 #pvidAndInfoWrapper{
 	flex-direction: column;
+	padding: 0% 3% 0% 3%;
 }
 
 #pvidToBePlayed{
@@ -1122,6 +1124,7 @@ overflow-y: scroll;
 
 #imgAndInfoWrapper{
 	flex-direction: column;
+	padding: 0% 3% 0% 3%;
 }
 
 
@@ -1194,6 +1197,10 @@ align-items: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.thumbnailslower{
+	width: 100%;
 }
 
 #seeFullPort{
@@ -1543,12 +1550,18 @@ function loadPlayer() {
 	  vidplayerdiv.style.visibility = "visible";
 	  vidplayerdiv.style.animation = "fadein 0.2s forwards";
 	  vidDivIsOpen = true;   
+	  // Push an initial state to manipulate history
+      history.pushState(null, null, location.href);
+
 }
 
 function ploadPlayer() {
 	  pvidplayerdiv.style.visibility = "visible";
 	  pvidplayerdiv.style.animation = "fadein 0.2s forwards";
-	  pvidDivIsOpen = true;   
+	  pvidDivIsOpen = true;
+	   // Push an initial state to manipulate history
+      history.pushState(null, null, location.href);
+   
 }
 
 
@@ -1557,6 +1570,9 @@ function loadViewer() {
 	  imgViewerdiv.style.animation = "fadein 0.2s forwards";
 	  gizmoInner.style.animation = "slider 10s infinite";
 	  imgDivIsOpen = true;   
+	   // Push an initial state to manipulate history
+      history.pushState(null, null, location.href);
+
 }
 
 function closePlayer() {
@@ -1618,7 +1634,7 @@ function closeViewer() {
 
 
 
-
+/*
 window.addEventListener("popstate", function (event) {
     // Prevent the default back button behavior
     history.pushState(null, null, location.href);
@@ -1627,8 +1643,17 @@ window.addEventListener("popstate", function (event) {
 if (imgDivIsOpen === true || pvidDivIsOpen === true || vidDivIsOpen === true) {
     // Code to execute if at least one condition is true
     imgViewerdiv.style.visibility = "hidden";
+    imgDivIsOpen = false; 
+    switchIsNeeded = false;
     pvidplayerdiv.style.visibility = "hidden";
+    pvidDivIsOpen = false;
     vidplayerdiv.style.visibility = "hidden";
+    vidDivIsOpen = false;
+    pvidToBePlayed.pause();
+    vidToBePlayed.pause();
+    clearTimeout(switchInterval);
+    stopHouseLoop();
+	stopManorLoop();
 
 }
  
@@ -1636,6 +1661,57 @@ if (imgDivIsOpen === true || pvidDivIsOpen === true || vidDivIsOpen === true) {
 
 // Push an initial state to manipulate history
 history.pushState(null, null, location.href);
+*/
+
+
+
+
+
+
+
+window.onload = function () {
+    // Store initial scroll position
+    history.replaceState({ scrollY: window.scrollY }, null, location.href);
+};
+
+window.addEventListener("popstate", function (event) {
+
+  // Perform your action (e.g., show modal, prevent navigation)
+    if (imgDivIsOpen === true || pvidDivIsOpen === true || vidDivIsOpen === true) {
+    // Code to execute if at least one condition is true
+    imgViewerdiv.style.visibility = "hidden";
+    imgDivIsOpen = false; 
+    switchIsNeeded = false;
+    pvidplayerdiv.style.visibility = "hidden";
+    pvidDivIsOpen = false;
+    vidplayerdiv.style.visibility = "hidden";
+    vidDivIsOpen = false;
+    pvidToBePlayed.pause();
+    vidToBePlayed.pause();
+    clearTimeout(switchInterval);
+    stopHouseLoop();
+	stopManorLoop();
+
+}
+
+    // Restore scroll position if available
+    if (event.state && event.state.scrollY !== undefined) {
+        window.scrollTo(0, event.state.scrollY);
+    }
+
+    // Push new state after slight delay to prevent jumping
+    setTimeout(() => {
+        history.pushState({ scrollY: window.scrollY }, null, location.href);
+    }, 100);
+});
+
+// Update scroll position on scroll
+window.addEventListener("scroll", function () {
+    history.replaceState({ scrollY: window.scrollY }, null, location.href);
+});
+
+
+
 
 
 
